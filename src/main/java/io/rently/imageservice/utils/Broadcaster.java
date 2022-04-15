@@ -1,4 +1,4 @@
-package io.rently.searchservice.utils;
+package io.rently.imageservice.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

@@ -1,4 +1,4 @@
-package io.rently.searchservice.utils;
+package io.rently.imageservice.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

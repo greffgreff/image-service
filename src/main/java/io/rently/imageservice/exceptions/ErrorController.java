@@ -1,13 +1,12 @@
-package io.rently.searchservice.exceptions;
+package io.rently.imageservice.exceptions;
 
-import io.rently.searchservice.dtos.ResponseContent;
-import io.rently.searchservice.utils.Broadcaster;
+import io.rently.imageservice.utils.Broadcaster;
+import io.rently.imageservice.dtos.ResponseContent;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletResponse;

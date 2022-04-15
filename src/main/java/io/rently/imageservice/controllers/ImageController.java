@@ -1,11 +1,11 @@
-package io.rently.searchservice.controllers;
+package io.rently.imageservice.controllers;
 
-import io.rently.searchservice.dtos.Image;
-import io.rently.searchservice.dtos.ResponseContent;
-import io.rently.searchservice.exceptions.Errors;
-import io.rently.searchservice.interfaces.ImageRepository;
-import io.rently.searchservice.utils.Broadcaster;
-import io.rently.searchservice.utils.Images;
+import io.rently.imageservice.dtos.Image;
+import io.rently.imageservice.dtos.ResponseContent;
+import io.rently.imageservice.interfaces.ImageRepository;
+import io.rently.imageservice.utils.Broadcaster;
+import io.rently.imageservice.utils.Images;
+import io.rently.imageservice.exceptions.Errors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

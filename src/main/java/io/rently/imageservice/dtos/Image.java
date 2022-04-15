@@ -1,4 +1,4 @@
-package io.rently.searchservice.dtos;
+package io.rently.imageservice.dtos;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

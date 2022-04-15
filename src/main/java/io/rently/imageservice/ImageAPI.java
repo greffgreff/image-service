@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ImageserviceApplication {
+public class ImageAPI {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ImageserviceApplication.class, args);
+		SpringApplication.run(ImageAPI.class, args);
 	}
 
 }

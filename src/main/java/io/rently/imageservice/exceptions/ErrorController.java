@@ -1,7 +1,10 @@
 package io.rently.imageservice.exceptions;
 
+import com.bugsnag.Bugsnag;
+import io.rently.imageservice.services.MailerService;
 import io.rently.imageservice.utils.Broadcaster;
 import io.rently.imageservice.dtos.ResponseContent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,12 +17,17 @@ import javax.servlet.http.HttpServletResponse;
 @ControllerAdvice
 public class ErrorController {
 
+    @Autowired
+    private Bugsnag bugsnag;
+
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseContent handleGenericException(HttpServletResponse response, Exception exception) {
         String msg = "An internal server error occurred. Request could not be completed";
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         Broadcaster.error(exception);
+        MailerService.dispatchErrorToDevs(exception);
+        bugsnag.notify(exception);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new ResponseContent.Builder(status).setMessage(msg).build();
     }

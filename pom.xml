@@ -40,6 +40,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.bugsnag</groupId>
+			<version>3.6.3</version>
+			<artifactId>bugsnag-spring</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

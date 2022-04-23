@@ -31,8 +31,8 @@ public class Images {
         int fontSize = (int) (sourceImage.getHeight() * 0.045);
         g2d.setColor(Color.WHITE);
         g2d.setFont(new Font(fontName, Font.BOLD, fontSize));
-        int x = 25;
-        int y = (sourceImage.getHeight() - 25);
+        int x = fontSize;
+        int y = (sourceImage.getHeight() - fontSize);
         g2d.drawString(text, x, y);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

@@ -38,26 +38,25 @@ public class ImageController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/{id}")
-    public ResponseContent handlePostImage(@PathVariable String id, @RequestBody String data) {
+    public String handlePostImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Adding image by id: " + id);
         repository.save(new Image(id, data));
-        String imageUrl = baseUrl + "/api/v1/images/" + id;
-        return new ResponseContent.Builder(HttpStatus.CREATED).setMessage(imageUrl).build();
+        return baseUrl + "/api/v1/images/" + id;
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseContent handlePutImage(@PathVariable String id, @RequestBody String data) {
+    public String handlePutImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Updating image by id: " + id);
         repository.deleteById(id);
         repository.save(new Image(id, data));
-        String imageUrl = baseUrl + "/api/v1/images/" + id;
-        return new ResponseContent.Builder().setMessage(imageUrl).build();
+        return baseUrl + "/api/v1/images/" + id;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseContent handleDeleteImage(@PathVariable String id) {
+    public void handleDeleteImage(@PathVariable String id) {
         Broadcaster.info("Deleting image by id: " + id);
+        Optional<Image> data = repository.queryById(id);
+        if (data.isEmpty()) throw Errors.NO_IMAGE;
         repository.deleteById(id);
-        return new ResponseContent.Builder().setMessage("Successfully removed image from database").build();
     }
 }

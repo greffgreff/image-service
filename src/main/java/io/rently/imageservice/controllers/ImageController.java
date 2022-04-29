@@ -7,6 +7,7 @@ import io.rently.imageservice.utils.Broadcaster;
 import io.rently.imageservice.utils.Images;
 import io.rently.imageservice.exceptions.Errors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/images")
-public class ImageController { // FIXME move to new service
+public class ImageController {
 
     @Autowired
-    public ImageRepository repository;
+    private ImageRepository repository;
+
+    @Value("${server.baseurl}")
+    private String baseUrl;
 
     @GetMapping(value = "/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] handleGetImage(@PathVariable String id) {
@@ -37,7 +41,8 @@ public class ImageController { // FIXME move to new service
     public ResponseContent handlePostImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Adding image by id: " + id);
         repository.save(new Image(id, data));
-        return new ResponseContent.Builder(HttpStatus.CREATED).setMessage("Successfully added image to database").build();
+        String imageUrl = baseUrl + "/api/v1/images/" + id;
+        return new ResponseContent.Builder(HttpStatus.CREATED).setMessage(imageUrl).build();
     }
 
     @PutMapping(value = "/{id}")
@@ -45,7 +50,8 @@ public class ImageController { // FIXME move to new service
         Broadcaster.info("Updating image by id: " + id);
         repository.deleteById(id);
         repository.save(new Image(id, data));
-        return new ResponseContent.Builder().setMessage("Successfully updated image in database").build();
+        String imageUrl = baseUrl + "/api/v1/images/" + id;
+        return new ResponseContent.Builder().setMessage(imageUrl).build();
     }
 
     @DeleteMapping("/{id}")

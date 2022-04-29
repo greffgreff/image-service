@@ -6,7 +6,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.sql.Timestamp;
 
 public class Broadcaster {
-    private static final String PREFIX = "[IMAGE ENDPOINT]";
+    private static final String PREFIX = "[IMAGE SERVICE]";
 
     public static void debug(Object obj) {
         System.out.println(defaultFormat("[DEBUG]") + obj);

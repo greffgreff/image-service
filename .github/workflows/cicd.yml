@@ -30,6 +30,15 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      - name: Setting up JDK 17...
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Building project...
+        run: mvn -B package --file pom.xml
+      - uses: actions/checkout@v2
       - name: Pushing docker image...
         uses: mr-smithers-excellent/docker-build-push@v5
         with:

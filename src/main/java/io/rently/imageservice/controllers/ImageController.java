@@ -47,7 +47,6 @@ public class ImageController {
     @PutMapping(value = "/{id}")
     public String handlePutImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Updating image by id: " + id);
-        repository.deleteById(id);
         repository.save(new Image(id, data));
         return baseUrl + "/api/v1/images/" + id;
     }

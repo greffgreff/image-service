@@ -20,9 +20,6 @@ import java.util.stream.Collectors;
 public class Interceptor implements HandlerInterceptor {
     private final List<String> blackListedMethods;
 
-    @Autowired
-    private Jwt jwt;
-
     public Interceptor(RequestMethod... excludedMethods) {
         this.blackListedMethods = Arrays.stream(excludedMethods).toList().stream()
                 .map(object -> Objects.toString(object, null))
@@ -47,7 +44,7 @@ public class Interceptor implements HandlerInterceptor {
             throw Errors.INVALID_REQUEST;
         }
 
-        if (!jwt.validateBearerToken(bearer)) {
+        if (!Jwt.validateBearerToken(bearer)) {
             throw Errors.UNAUTHORIZED_REQUEST;
         }
 

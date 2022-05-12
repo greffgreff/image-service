@@ -37,14 +37,14 @@ public class ImageController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/{id}")
+    @PostMapping("/{id}")
     public String handlePostImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Adding image by id: " + id);
         repository.save(new Image(id, data));
         return baseUrl + "/api/v1/images/" + id;
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping("/{id}")
     public String handlePutImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Updating image by id: " + id);
         repository.save(new Image(id, data));

@@ -40,15 +40,17 @@ public class ImageController {
     @PostMapping("/{id}")
     public String handlePostImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Adding image by id: " + id);
+        checkData(data);
         repository.save(new Image(id, data));
-        return baseUrl + "/api/v1/images/" + id;
+        return baseUrl + "api/v1/images/" + id;
     }
 
     @PutMapping("/{id}")
     public String handlePutImage(@PathVariable String id, @RequestBody String data) {
         Broadcaster.info("Updating image by id: " + id);
+        checkData(data);
         repository.save(new Image(id, data));
-        return baseUrl + "/api/v1/images/" + id;
+        return baseUrl + "api/v1/images/" + id;
     }
 
     @DeleteMapping("/{id}")
@@ -57,5 +59,13 @@ public class ImageController {
         Optional<Image> data = repository.queryById(id);
         if (data.isEmpty()) throw Errors.NO_IMAGE;
         repository.deleteById(id);
+    }
+
+    private void checkData(String data) {
+        try {
+            Base64.getDecoder().decode(data);
+        } catch (Exception ignore) {
+            throw Errors.INVALID_DATA;
+        }
     }
 }

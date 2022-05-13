@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletResponse;
 
 @ControllerAdvice
-public class ErrorController {
+public class ExceptionController {
 
     @Autowired
     private Bugsnag bugsnag;

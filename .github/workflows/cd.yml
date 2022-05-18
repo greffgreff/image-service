@@ -1,4 +1,4 @@
-name: Image Service CI CD
+name: Image Service CD
 
 on:
   push:

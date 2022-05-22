@@ -13,9 +13,20 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class Images {
-    public static File RENTLY_FONT;
+
+    public static void addFont(File file) {
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, file));
+        } catch (Exception exception) {
+            Broadcaster.error(exception);
+        }
+    }
 
     public static byte[] addRentlyWatermark(byte[] imageBytes) {
+        File file = new File("src/main/java/io/rently/imageservice/assets/Ubuntu-Bold.ttf");
+        addFont(file);
+
         try {
             return addTextWatermark("Rently.io", "Ubuntu", imageBytes);
         } catch (Exception exception) {
@@ -43,12 +54,5 @@ public class Images {
         g2d.dispose();
 
         return watermarkedImage;
-    }
-
-    static {
-        try {
-            URL url = new URL("https://fonts.googleapis.com/css?family=Ubuntu:Bold");
-            RENTLY_FONT = new File(url.toURI());
-        } catch (Exception ignore) { }
     }
 }

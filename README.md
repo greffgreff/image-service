@@ -55,6 +55,8 @@ Returns a JPEG image upon specifying a valid image `id`.
 
 > _none_
 
+<br />
+
 ### `POST /api/v1/images/{id}`
 
 Returns a URL after supplying proper image base64 data upon specifying a valid image `id`.
@@ -74,10 +76,6 @@ Base64 image data.
 ```
 https://images-service-rently.herokuapp.com/api/v1/images/9f4de707-28fb-4511-b519-3684b848ed35
 ```
-
-#### Request body parameters:
-
-> _none_
 
 ### `PUT /api/v1/images/{id}`
 

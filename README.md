@@ -32,7 +32,7 @@ After each subsequent additions and changes to the codebase of the service, test
 
 | **Field**         | **Description**              |
 | ----------------- | ---------------------------- |
-| `sub` uuid string | The user's id                |
+| `sub` uuid string | The image's id                |
 | `iat` timestamp   | Issue time of the token      |
 | `exp` timestamp   | Expiration time of the token |
 | `jti` uuid string | The token's id               |

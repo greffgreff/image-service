@@ -110,7 +110,3 @@ Deletes an image id a valid existing image `id`.
 #### Request body parameters:
 
 > _none_
-
-#### Return example:
-
-Nothing.

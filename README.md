@@ -43,14 +43,71 @@ After each subsequent additions and changes to the codebase of the service, test
 
 ### `GET /api/v1/images/{id}`
 
-Returns a json [response](#response-object) object containing one [user](#user-object) object. Permits fetching user data using a `provider` and a `provider account id`.
+Returns a JPEG image upon specifying a valid image `id`.
 
 #### URL parameters:
 
 |       **Parameter** | **Description**           | **Required** |
 | ------------------: | ------------------------- | :----------: |
-|   `provider` string | Valid provider name       |     true     |
-| `providerId` string | Valid provider account id |     true     |
+|   `id` string       | Valid image id            |     true     |
+
+#### Request body parameters:
+
+> _none_
+
+### `POST /api/v1/images/{id}`
+
+Returns a URL after supplying proper image base64 data upon specifying a valid image `id`.
+
+#### URL parameters:
+
+|       **Parameter** | **Description**           | **Required** |
+| ------------------: | ------------------------- | :----------: |
+|   `id` string       | Valid image id            |     true     |
+
+#### Request body parameters:
+
+Base64 image data.
+
+#### Return example:
+
+```
+https://images-service-rently.herokuapp.com/api/v1/images/9f4de707-28fb-4511-b519-3684b848ed35
+```
+
+#### Request body parameters:
+
+> _none_
+
+### `PUT /api/v1/images/{id}`
+
+Returns a URL after supplying proper image base64 data upon specifying a valid exsiting image `id`.
+
+#### URL parameters:
+
+|       **Parameter** | **Description**           | **Required** |
+| ------------------: | ------------------------- | :----------: |
+|   `id` string       | Valid image id            |     true     |
+
+#### Request body parameters:
+
+Base64 image data.
+
+#### Return example:
+
+```
+https://images-service-rently.herokuapp.com/api/v1/images/9f4de707-28fb-4511-b519-3684b848ed35
+```
+
+### `DELETE /api/v1/images/{id}`
+
+Deletes an image id a valid existing image `id`.
+
+#### URL parameters:
+
+|       **Parameter** | **Description**           | **Required** |
+| ------------------: | ------------------------- | :----------: |
+|   `id` string       | Valid image id            |     true     |
 
 #### Request body parameters:
 
@@ -58,18 +115,4 @@ Returns a json [response](#response-object) object containing one [user](#user-o
 
 #### Return example:
 
-```json
-{
-  "timestamp": "2022-03-17 16:58:12",
-  "status": 200,
-  "content": {
-    "id": "3bdb141f-deb6-4260-a8ac-999e6ab9c89d",
-    "name": "fmullett4",
-    "provider": "facebook",
-    "providerId": "123123abcabc",
-    "email": "fmullett4@51.la",
-    "createdAt": "1617868768000",
-    "updatedAt": "1635152066000"
-  }
-}
-```
+Nothing.

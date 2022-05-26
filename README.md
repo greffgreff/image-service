@@ -63,7 +63,7 @@ Returns a URL after supplying proper image base64 data upon specifying a valid i
 
 |       **Parameter** | **Description**           | **Required** |
 | ------------------: | ------------------------- | :----------: |
-|   `id` string       | Valid image id            |     true     |
+|   `id` uuid string       | Valid image id            |     true     |
 
 #### Request body parameters:
 
@@ -87,7 +87,7 @@ Returns a URL after supplying proper image base64 data upon specifying a valid e
 
 |       **Parameter** | **Description**           | **Required** |
 | ------------------: | ------------------------- | :----------: |
-|   `id` string       | Valid image id            |     true     |
+|   `id` uuid string       | Valid image id            |     true     |
 
 #### Request body parameters:
 
@@ -107,7 +107,7 @@ Deletes an image id a valid existing image `id`.
 
 |       **Parameter** | **Description**           | **Required** |
 | ------------------: | ------------------------- | :----------: |
-|   `id` string       | Valid image id            |     true     |
+|   `id` uuid string       | Valid image id            |     true     |
 
 #### Request body parameters:
 

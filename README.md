@@ -24,7 +24,7 @@ After each subsequent additions and changes to the codebase of the service, test
 > ⚠️ Please note that the service is currently deployed on a free Heroku instance and needs a few seconds to warm up on first request!
 
 ### C2 model
-![C2 model](https://i.imgur.com/CqQbDQA.png)
+![C2 model](https://i.imgur.com/KEhA9Dx.jpg)
 
 ## Objects
 

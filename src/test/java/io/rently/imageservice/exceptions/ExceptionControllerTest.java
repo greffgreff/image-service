@@ -37,7 +37,7 @@ class ExceptionControllerTest {
     }
 
     @Test
-    void unhandledExceptionmailerAndBugsnagInvoked_void() {
+    void unhandledException_mailerAndBugsnagInvoked_void() {
         Exception exception = new Exception("This is an unhandled exception");
         ResponseStatusException expectedException = Errors.INTERNAL_SERVER_ERROR;
 
@@ -86,5 +86,11 @@ class ExceptionControllerTest {
 
     @Test
     void handleIllegalArgumentException() {
+        Exception exception = new Exception("This is an exception");
+
+        ResponseContent content = ExceptionController.handleIllegalArgumentException(response, exception);
+
+        assert response.getStatus() == HttpStatus.BAD_REQUEST.value();
+        assert content.getStatus() == HttpStatus.BAD_REQUEST.value();
     }
 }

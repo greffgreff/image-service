@@ -21,7 +21,6 @@ public class ImageController {
 
     @Autowired
     private ImageRepository repository;
-
     @Value("${server.baseurl}")
     private String baseUrl;
 

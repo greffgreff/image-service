@@ -7,10 +7,12 @@ import io.rently.imageservice.dtos.ResponseContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.MethodNotAllowedException;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletResponse;
@@ -49,18 +51,15 @@ public class ExceptionController {
     }
 
     @ResponseBody
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    public static ResponseContent handleInvalidURI(HttpServletResponse response, MissingServletRequestParameterException ex) {
-        HttpStatus status = HttpStatus.BAD_REQUEST;
-        response.setStatus(status.value());
-        String msg = "Missing required query string parameter `" + ex.getParameterName() + "` of type "+
-                ex.getParameterType() +" in URL. Example: '"+ ex.getParameterName() +"=<" + ex.getParameterType() + " value>'";
-        Broadcaster.httpError(msg, status);
-        return new ResponseContent.Builder(status).setMessage(msg).build();
+    @ExceptionHandler({ MethodNotAllowedException.class, HttpRequestMethodNotSupportedException.class })
+    public static ResponseContent handleInvalidURI(HttpServletResponse response) {
+        ResponseStatusException resEx = Errors.INVALID_URI_PATH;
+        response.setStatus(resEx.getStatus().value());
+        return new ResponseContent.Builder(resEx.getStatus()).setMessage(resEx.getReason()).build();
     }
 
     @ResponseBody
-    @ExceptionHandler({IllegalArgumentException.class, HttpMessageNotReadableException.class })
+    @ExceptionHandler({ IllegalArgumentException.class, HttpMessageNotReadableException.class })
     public static ResponseContent handleIllegalArgumentException(HttpServletResponse response, Exception ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         Broadcaster.httpError(ex.getMessage(), status);

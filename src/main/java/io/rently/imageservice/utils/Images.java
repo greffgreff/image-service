@@ -15,11 +15,8 @@ import java.net.URL;
 public class Images {
 
     private Images() {
-        addFont(new File("src/main/java/io/rently/imageservice/assets/Ubuntu-Bold.ttf"));
-    }
-
-    public static void addFont(File file) {
         try {
+            File file = new File("src/main/java/io/rently/imageservice/assets/Ubuntu-Bold.ttf");
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, file));
         } catch (Exception exception) {

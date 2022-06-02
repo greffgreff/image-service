@@ -14,6 +14,10 @@ import java.net.URL;
 
 public class Images {
 
+    private Images() {
+        addFont(new File("src/main/java/io/rently/imageservice/assets/Ubuntu-Bold.ttf"));
+    }
+
     public static void addFont(File file) {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -24,9 +28,6 @@ public class Images {
     }
 
     public static byte[] addRentlyWatermark(byte[] imageBytes) {
-        File file = new File("src/main/java/io/rently/imageservice/assets/Ubuntu-Bold.ttf");
-        addFont(file);
-
         try {
             return addTextWatermark("Rently.io", "Ubuntu", imageBytes);
         } catch (Exception exception) {

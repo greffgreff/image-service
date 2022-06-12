@@ -25,7 +25,10 @@ public class AppConfigs implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedMethods("*").allowedHeaders("*");
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3000", "https://rently-io.herokuapp.com", "https://listing-service-rently.herokuapp.com/")
+                .allowedMethods("*")
+                .allowedHeaders("*");
     }
 
     @Override

@@ -21,7 +21,6 @@ public class ImageController {
 
     @Autowired
     private ImageRepository repository;
-
     @Value("${server.baseurl}")
     private String baseUrl;
 
@@ -61,7 +60,7 @@ public class ImageController {
         repository.deleteById(id);
     }
 
-    private void checkData(String data) {
+    public void checkData(String data) {
         try {
             Base64.getDecoder().decode(data);
         } catch (Exception ignore) {

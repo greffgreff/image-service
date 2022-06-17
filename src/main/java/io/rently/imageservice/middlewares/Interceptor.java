@@ -1,9 +1,7 @@
 package io.rently.imageservice.middlewares;
 
-import io.rently.imageservice.exceptions.Errors;
 import io.rently.imageservice.utils.Broadcaster;
 import io.rently.imageservice.utils.Jwt;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,18 +9,21 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class Interceptor implements HandlerInterceptor {
-    private final List<String> blackListedMethods;
 
-    public Interceptor(RequestMethod... excludedMethods) {
-        this.blackListedMethods = Arrays.stream(excludedMethods).toList().stream()
-                .map(object -> Objects.toString(object, null))
+    private final Jwt jwt;
+    public final List<String> blackListedMethods;
+
+    public Interceptor(Jwt jwt, RequestMethod... excludedMethods) {
+        this.jwt = jwt;
+        this.blackListedMethods = Stream.of(excludedMethods)
+                .map(m -> Objects.toString(m, null))
                 .collect(Collectors.toList());
 
         if (blackListedMethods.size() != 0) {
@@ -32,31 +33,17 @@ public class Interceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (RequestMethod.OPTIONS.name().equals(request.getMethod())) {
-            handleOptionRequest(response);
+            response.setHeader("Cache-Control","no-cache");
+            response.setHeader("Access-control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
+            response.setHeader("Access-Control-Allow-Headers", "*");
+            response.setStatus(HttpStatus.OK.value());
             return true;
         }
         if (blackListedMethods.contains(request.getMethod())) {
             return true;
         }
-
         String bearer = request.getHeader("Authorization");
-        if (bearer == null) {
-            throw Errors.INVALID_REQUEST;
-        }
-
-        if (!Jwt.validateBearerToken(bearer)) {
-            throw Errors.UNAUTHORIZED_REQUEST;
-        }
-
-        return true;
-    }
-
-    public void handleOptionRequest(HttpServletResponse response) {
-        response.setHeader("Cache-Control","no-cache");
-        response.setHeader("Access-control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
-        response.setHeader("Access-Control-Allow-Headers", "*");
-        response.setStatus(HttpStatus.OK.value());
+        return jwt.validateBearerToken(bearer);
     }
 }
-

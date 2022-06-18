@@ -23,6 +23,11 @@ After each subsequent additions and changes to the codebase of the service, test
 
 > ⚠️ Please note that the service is currently deployed on a free Heroku instance and needs a few seconds to warm up on first request!
 
+Please use the following command to run the docker image:
+```bash
+docker run -p 8083:8083 -e CREDENTIALS=bb63b9ccbf9ab6:GhcjiQrwHJ6tGjXz dockeroo80/rently-image-service
+```
+
 ### C2 model
 ![C2 model](https://i.imgur.com/34Nvkd4.jpg)
 
